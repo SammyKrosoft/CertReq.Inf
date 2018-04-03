@@ -49,3 +49,5 @@ CertificateTemplate = WebServer ; Modify for your environment by using the LDAP 
 
 ;Save this file as "CertReq01.inf" for example, and run the below command:
 ;CertReq.exe -New CertReq.inf MyCertReq.req
+;At this point there is a "pending certificate request" 
+;Once you obtain the certificate form the CA (internal CA or public CA), you must "mate" the pending certificate request with the signed CA response
