@@ -12,5 +12,13 @@ CertReq.exe -New CertReq.inf MyCertReq.req
 
 And takes the information defined in the CertReq initialization file to create a Cert Request that you'll give to your Certification Authority.
 
+Once you receive the response from the CA (Internal or External -Public- one), you must "mate" the "pending certificate request" with the signed CA response certificate using :
+
+CertReq -Accept CertReceivedFromCA.cer
+
+IMPORTANT : the whole CertReq -New and CertReq -Accept MUST be done on the same machine ... because when you create a CertRequest, a pair of keys are generated : one Public key, that is encoded with the .Req certificate request, and one Private key, that stays on the machine (uncrypted, and under the Windows\Crypto\... subfolder)
+
 ## Other methods
 Other well known methods to generate a certificate requests are through IIS and/or Exchange (using New-ExchangeCertificateRequest / Import-ExchangeCertificate / Enable-ExchangeCertificate), but I won't detail these about it, plenty of examples on the internet, including a DIGICERT Exchange PowerShell Certificate Request generator that work very well with any Exchange version - not only Exchange 2010)
+
+IMPORTANT: just like the CertReq method, the Certificate Request and Acceptation/Import MUST be done from the same machine - with any methods, a pair of keys are created - one Public that is inside the request file and one Private that stays on the machine under Windows\Crypto\.... subfolder - and once imported the Private Key is attached (or "mated" like Rhoderick like to write it) with the received certificate from the Internal or External/Public CA.
