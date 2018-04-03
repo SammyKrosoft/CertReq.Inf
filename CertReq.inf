@@ -1,0 +1,51 @@
+[Version]
+Signature="$Windows NT$"
+
+[NewRequest]
+Subject = "CN=sts.tailspintoys.ca" ; Remove to use an empty Subject name.
+
+;Because SSL/TLS does not require a Subject name when a SAN extension is included, the certificate Subject name can be empty.
+;If you are using another protocol, verify the certificate requirements.
+;EncipherOnly = FALSE ; Only for Windows Server 2003 and Windows XP. Remove for all other client operating system versions.
+
+Exportable = TRUE ; TRUE = Private key is exportable
+KeyLength = 2048 ; Valid key sizes: 1024, 2048, 4096, 8192, 16384
+KeySpec = 1 ; Key Exchange – Required for encryption
+KeyUsage = 0xA0 ; Digital Signature, Key Encipherment
+MachineKeySet = True
+ProviderName = "Microsoft RSA SChannel Cryptographic Provider"
+RequestType = PKCS10 ; or CMC.
+
+[EnhancedKeyUsageExtension]
+; If you are using an enterprise CA the EnhancedKeyUsageExtension section can be omitted
+
+OID=1.3.6.1.5.5.7.3.1 ; Server Authentication
+OID=1.3.6.1.5.5.7.3.2 ; Client Authentication
+
+[Extensions]
+; If your client operating system is Windows Server 2008, Windows Server 2008 R2, Windows Vista, or Windows 7
+; SANs can be included in the Extensions section by using the following text format. Note 2.5.29.17 is the OID for a SAN extension.
+2.5.29.17 = "{text}"
+_continue_ = "dns=sts.tailspintoys.ca&"
+_continue_ = "dns=legacy.tailspintoys.ca&"
+_continue_ = "dns=zorg.tailspintoys.ca&"
+
+; If your client operating system is Windows Server 2003, Windows Server 2003 R2, or Windows XP
+; SANs can be included in the Extensions section only by adding Base64-encoded text containing the alternative names in ASN.1 format.
+; Use the provided script MakeSanExt.vbs to generate a SAN extension in this format.
+; RMILNE – the below line is remmed out else we get an error since there are duplicate sections for OID 2.5.29.17
+; 2.5.29.17=MCaCEnd3dzAxLmZhYnJpa2FtLmNvbYIQd3d3LmZhYnJpa2FtLmNvbQ
+
+[RequestAttributes]
+; If your client operating system is Windows Server 2003, Windows Server 2003 R2, or Windows XP
+; and you are using a standalone CA, SANs can be included in the RequestAttributes
+; section by using the following text format.
+
+;”SAN="dns=not.server2008r2.com&dns=stillnot.server2008r2.com&dns=meh.2003server.com"
+; Multiple alternative names must be separated by an ampersand (&).
+
+CertificateTemplate = WebServer ; Modify for your environment by using the LDAP common name of the template.
+;Required only for enterprise CAs.
+
+;Save this file as "CertReq01.inf" for example, and run the below command:
+;CertReq.exe -New CertReq.inf MyCertReq.req
