@@ -4,7 +4,9 @@ I'll start with the information from my friend Rhoderick Milne from this blog po
 https://blogs.technet.microsoft.com/rmilne/2014/06/17/how-to-request-certificate-without-using-iis-or-exchange/
 
 ## CertReq initialization file
-Directly taken from Rhod's above article
+That is the "CertReq.inf" file on this repository, directly taken from Rhod's above article.
+https://github.com/SammyKrosoft/CertReq.Inf/blob/master/CertReq.inf 
+
 ## CertReq command line
 That one is :
 
