@@ -10,13 +10,16 @@ https://github.com/SammyKrosoft/CertReq.Inf/blob/master/CertReq.inf
 ## CertReq command line
 That one is :
 
+```Batchfile
 CertReq.exe -New CertReq.inf MyCertReq.req
-
+```
 And takes the information defined in the CertReq initialization file to create a Cert Request that you'll give to your Certification Authority.
 
 Once you receive the response from the CA (Internal or External -Public- one), you must "mate" the "pending certificate request" with the signed CA response certificate using :
 
+```Batchfile
 CertReq -Accept CertReceivedFromCA.cer
+```
 
 IMPORTANT : the whole CertReq -New and CertReq -Accept MUST be done on the same machine ... because when you create a CertRequest, a pair of keys are generated : one Public key, that is encoded with the .Req certificate request, and one Private key, that stays on the machine (encrypted, and under the Windows\Crypto\... subfolder)
 
