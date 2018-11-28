@@ -18,7 +18,7 @@ Once you receive the response from the CA (Internal or External -Public- one), y
 
 CertReq -Accept CertReceivedFromCA.cer
 
-IMPORTANT : the whole CertReq -New and CertReq -Accept MUST be done on the same machine ... because when you create a CertRequest, a pair of keys are generated : one Public key, that is encoded with the .Req certificate request, and one Private key, that stays on the machine (uncrypted, and under the Windows\Crypto\... subfolder)
+IMPORTANT : the whole CertReq -New and CertReq -Accept MUST be done on the same machine ... because when you create a CertRequest, a pair of keys are generated : one Public key, that is encoded with the .Req certificate request, and one Private key, that stays on the machine (encrypted, and under the Windows\Crypto\... subfolder)
 
 ## Other methods
 Other well known methods to generate a certificate requests are through IIS and/or Exchange (using New-ExchangeCertificateRequest / Import-ExchangeCertificate / Enable-ExchangeCertificate), but I won't detail these about it, plenty of examples on the internet, including a DIGICERT Exchange PowerShell Certificate Request generator that work very well with any Exchange version - not only Exchange 2010)
